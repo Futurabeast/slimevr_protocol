@@ -4,6 +4,7 @@ export { Acknowledgement, AcknowledgementT } from './slimevr-protocol/misc/ackno
 export { ApplicationType } from './slimevr-protocol/server/application-type';
 export { AssignTrackerRequest, AssignTrackerRequestT } from './slimevr-protocol/server/assign-tracker-request';
 export { ChangeSettingsRequest, ChangeSettingsRequestT } from './slimevr-protocol/server/change-settings-request';
+export { ChangeSkeletonConfigRequest, ChangeSkeletonConfigRequestT } from './slimevr-protocol/server/change-skeleton-config-request';
 export { ConnectionRequest, ConnectionRequestT } from './slimevr-protocol/server/connection-request';
 export { DeviceStatus, DeviceStatusT } from './slimevr-protocol/server/device-status';
 export { DeviceStatusFeatures, DeviceStatusFeaturesT } from './slimevr-protocol/server/device-status-features';
@@ -16,8 +17,12 @@ export { OutboundUnion, unionToOutboundUnion, unionListToOutboundUnion } from '.
 export { ResetRequest, ResetRequestT } from './slimevr-protocol/server/reset-request';
 export { SettingsRequest, SettingsRequestT } from './slimevr-protocol/server/settings-request';
 export { SettingsResponse, SettingsResponseT } from './slimevr-protocol/server/settings-response';
+export { SkeletonConfigRequest, SkeletonConfigRequestT } from './slimevr-protocol/server/skeleton-config-request';
+export { SkeletonConfigResponse, SkeletonConfigResponseT } from './slimevr-protocol/server/skeleton-config-response';
+export { SkeletonConfigValue } from './slimevr-protocol/server/skeleton-config-value';
+export { SkeletonPart, SkeletonPartT } from './slimevr-protocol/server/skeleton-part';
 export { SteamVRTrackersSetting, SteamVRTrackersSettingT } from './slimevr-protocol/server/steam-vrtrackers-setting';
 export { TrackerListFeatures, TrackerListFeaturesT } from './slimevr-protocol/server/tracker-list-features';
-export { TrackerRole } from './slimevr-protocol/server/tracker-role';
+export { TrackerPosition } from './slimevr-protocol/server/tracker-position';
 export { TrackerStatus } from './slimevr-protocol/server/tracker-status';
 export { TrackersList, TrackersListT } from './slimevr-protocol/server/trackers-list';

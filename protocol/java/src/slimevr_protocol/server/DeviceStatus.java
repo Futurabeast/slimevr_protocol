@@ -19,7 +19,7 @@ public final class DeviceStatus extends Table {
   public String name() { int o = __offset(6); return o != 0 ? __string(o + bb_pos) : null; }
   public ByteBuffer nameAsByteBuffer() { return __vector_as_bytebuffer(6, 1); }
   public ByteBuffer nameInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 6, 1); }
-  public int role() { int o = __offset(8); return o != 0 ? bb.get(o + bb_pos) & 0xFF : 0; }
+  public int mountingPosition() { int o = __offset(8); return o != 0 ? bb.get(o + bb_pos) & 0xFF : 0; }
   public int mountingRotation() { int o = __offset(10); return o != 0 ? bb.getShort(o + bb_pos) & 0xFFFF : 0; }
   public slimevr_protocol.datatypes.Quat rotation() { return rotation(new slimevr_protocol.datatypes.Quat()); }
   public slimevr_protocol.datatypes.Quat rotation(slimevr_protocol.datatypes.Quat obj) { int o = __offset(12); return o != 0 ? obj.__assign(o + bb_pos, bb) : null; }
@@ -36,7 +36,7 @@ public final class DeviceStatus extends Table {
   public static void startDeviceStatus(FlatBufferBuilder builder) { builder.startTable(13); }
   public static void addId(FlatBufferBuilder builder, int id) { builder.addByte(0, (byte) id, (byte) 0); }
   public static void addName(FlatBufferBuilder builder, int nameOffset) { builder.addOffset(1, nameOffset, 0); }
-  public static void addRole(FlatBufferBuilder builder, int role) { builder.addByte(2, (byte) role, (byte) 0); }
+  public static void addMountingPosition(FlatBufferBuilder builder, int mountingPosition) { builder.addByte(2, (byte) mountingPosition, (byte) 0); }
   public static void addMountingRotation(FlatBufferBuilder builder, int mountingRotation) { builder.addShort(3, (short) mountingRotation, (short) 0); }
   public static void addRotation(FlatBufferBuilder builder, int rotationOffset) { builder.addStruct(4, rotationOffset, 0); }
   public static void addPosition(FlatBufferBuilder builder, int positionOffset) { builder.addStruct(5, positionOffset, 0); }

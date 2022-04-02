@@ -3,9 +3,11 @@
 import { Acknowledgement, AcknowledgementT } from '../../slimevr-protocol/misc/acknowledgement';
 import { AssignTrackerRequest, AssignTrackerRequestT } from '../../slimevr-protocol/server/assign-tracker-request';
 import { ChangeSettingsRequest, ChangeSettingsRequestT } from '../../slimevr-protocol/server/change-settings-request';
+import { ChangeSkeletonConfigRequest, ChangeSkeletonConfigRequestT } from '../../slimevr-protocol/server/change-skeleton-config-request';
 import { ConnectionRequest, ConnectionRequestT } from '../../slimevr-protocol/server/connection-request';
 import { ResetRequest, ResetRequestT } from '../../slimevr-protocol/server/reset-request';
 import { SettingsRequest, SettingsRequestT } from '../../slimevr-protocol/server/settings-request';
+import { SkeletonConfigRequest, SkeletonConfigRequestT } from '../../slimevr-protocol/server/skeleton-config-request';
 
 
 export enum InboundUnion{
@@ -15,13 +17,15 @@ export enum InboundUnion{
   AssignTrackerRequest = 3,
   ChangeSettingsRequest = 4,
   SettingsRequest = 5,
-  slimevr_protocol_misc_Acknowledgement = 6
+  SkeletonConfigRequest = 6,
+  ChangeSkeletonConfigRequest = 7,
+  slimevr_protocol_misc_Acknowledgement = 8
 }
 
 export function unionToInboundUnion(
   type: InboundUnion,
-  accessor: (obj:Acknowledgement|AssignTrackerRequest|ChangeSettingsRequest|ConnectionRequest|ResetRequest|SettingsRequest) => Acknowledgement|AssignTrackerRequest|ChangeSettingsRequest|ConnectionRequest|ResetRequest|SettingsRequest|null
-): Acknowledgement|AssignTrackerRequest|ChangeSettingsRequest|ConnectionRequest|ResetRequest|SettingsRequest|null {
+  accessor: (obj:Acknowledgement|AssignTrackerRequest|ChangeSettingsRequest|ChangeSkeletonConfigRequest|ConnectionRequest|ResetRequest|SettingsRequest|SkeletonConfigRequest) => Acknowledgement|AssignTrackerRequest|ChangeSettingsRequest|ChangeSkeletonConfigRequest|ConnectionRequest|ResetRequest|SettingsRequest|SkeletonConfigRequest|null
+): Acknowledgement|AssignTrackerRequest|ChangeSettingsRequest|ChangeSkeletonConfigRequest|ConnectionRequest|ResetRequest|SettingsRequest|SkeletonConfigRequest|null {
   switch(InboundUnion[type]) {
     case 'NONE': return null; 
     case 'ConnectionRequest': return accessor(new ConnectionRequest())! as ConnectionRequest;
@@ -29,6 +33,8 @@ export function unionToInboundUnion(
     case 'AssignTrackerRequest': return accessor(new AssignTrackerRequest())! as AssignTrackerRequest;
     case 'ChangeSettingsRequest': return accessor(new ChangeSettingsRequest())! as ChangeSettingsRequest;
     case 'SettingsRequest': return accessor(new SettingsRequest())! as SettingsRequest;
+    case 'SkeletonConfigRequest': return accessor(new SkeletonConfigRequest())! as SkeletonConfigRequest;
+    case 'ChangeSkeletonConfigRequest': return accessor(new ChangeSkeletonConfigRequest())! as ChangeSkeletonConfigRequest;
     case 'slimevr_protocol_misc_Acknowledgement': return accessor(new Acknowledgement())! as Acknowledgement;
     default: return null;
   }
@@ -36,9 +42,9 @@ export function unionToInboundUnion(
 
 export function unionListToInboundUnion(
   type: InboundUnion, 
-  accessor: (index: number, obj:Acknowledgement|AssignTrackerRequest|ChangeSettingsRequest|ConnectionRequest|ResetRequest|SettingsRequest) => Acknowledgement|AssignTrackerRequest|ChangeSettingsRequest|ConnectionRequest|ResetRequest|SettingsRequest|null, 
+  accessor: (index: number, obj:Acknowledgement|AssignTrackerRequest|ChangeSettingsRequest|ChangeSkeletonConfigRequest|ConnectionRequest|ResetRequest|SettingsRequest|SkeletonConfigRequest) => Acknowledgement|AssignTrackerRequest|ChangeSettingsRequest|ChangeSkeletonConfigRequest|ConnectionRequest|ResetRequest|SettingsRequest|SkeletonConfigRequest|null, 
   index: number
-): Acknowledgement|AssignTrackerRequest|ChangeSettingsRequest|ConnectionRequest|ResetRequest|SettingsRequest|null {
+): Acknowledgement|AssignTrackerRequest|ChangeSettingsRequest|ChangeSkeletonConfigRequest|ConnectionRequest|ResetRequest|SettingsRequest|SkeletonConfigRequest|null {
   switch(InboundUnion[type]) {
     case 'NONE': return null; 
     case 'ConnectionRequest': return accessor(index, new ConnectionRequest())! as ConnectionRequest;
@@ -46,6 +52,8 @@ export function unionListToInboundUnion(
     case 'AssignTrackerRequest': return accessor(index, new AssignTrackerRequest())! as AssignTrackerRequest;
     case 'ChangeSettingsRequest': return accessor(index, new ChangeSettingsRequest())! as ChangeSettingsRequest;
     case 'SettingsRequest': return accessor(index, new SettingsRequest())! as SettingsRequest;
+    case 'SkeletonConfigRequest': return accessor(index, new SkeletonConfigRequest())! as SkeletonConfigRequest;
+    case 'ChangeSkeletonConfigRequest': return accessor(index, new ChangeSkeletonConfigRequest())! as ChangeSkeletonConfigRequest;
     case 'slimevr_protocol_misc_Acknowledgement': return accessor(index, new Acknowledgement())! as Acknowledgement;
     default: return null;
   }

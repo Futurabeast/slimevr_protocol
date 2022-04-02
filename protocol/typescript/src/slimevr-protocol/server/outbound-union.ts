@@ -2,6 +2,7 @@
 
 import { Acknowledgement, AcknowledgementT } from '../../slimevr-protocol/misc/acknowledgement';
 import { SettingsResponse, SettingsResponseT } from '../../slimevr-protocol/server/settings-response';
+import { SkeletonConfigResponse, SkeletonConfigResponseT } from '../../slimevr-protocol/server/skeleton-config-response';
 import { TrackersList, TrackersListT } from '../../slimevr-protocol/server/trackers-list';
 
 
@@ -9,17 +10,19 @@ export enum OutboundUnion{
   NONE = 0,
   TrackersList = 1,
   SettingsResponse = 2,
-  slimevr_protocol_misc_Acknowledgement = 3
+  SkeletonConfigResponse = 3,
+  slimevr_protocol_misc_Acknowledgement = 4
 }
 
 export function unionToOutboundUnion(
   type: OutboundUnion,
-  accessor: (obj:Acknowledgement|SettingsResponse|TrackersList) => Acknowledgement|SettingsResponse|TrackersList|null
-): Acknowledgement|SettingsResponse|TrackersList|null {
+  accessor: (obj:Acknowledgement|SettingsResponse|SkeletonConfigResponse|TrackersList) => Acknowledgement|SettingsResponse|SkeletonConfigResponse|TrackersList|null
+): Acknowledgement|SettingsResponse|SkeletonConfigResponse|TrackersList|null {
   switch(OutboundUnion[type]) {
     case 'NONE': return null; 
     case 'TrackersList': return accessor(new TrackersList())! as TrackersList;
     case 'SettingsResponse': return accessor(new SettingsResponse())! as SettingsResponse;
+    case 'SkeletonConfigResponse': return accessor(new SkeletonConfigResponse())! as SkeletonConfigResponse;
     case 'slimevr_protocol_misc_Acknowledgement': return accessor(new Acknowledgement())! as Acknowledgement;
     default: return null;
   }
@@ -27,13 +30,14 @@ export function unionToOutboundUnion(
 
 export function unionListToOutboundUnion(
   type: OutboundUnion, 
-  accessor: (index: number, obj:Acknowledgement|SettingsResponse|TrackersList) => Acknowledgement|SettingsResponse|TrackersList|null, 
+  accessor: (index: number, obj:Acknowledgement|SettingsResponse|SkeletonConfigResponse|TrackersList) => Acknowledgement|SettingsResponse|SkeletonConfigResponse|TrackersList|null, 
   index: number
-): Acknowledgement|SettingsResponse|TrackersList|null {
+): Acknowledgement|SettingsResponse|SkeletonConfigResponse|TrackersList|null {
   switch(OutboundUnion[type]) {
     case 'NONE': return null; 
     case 'TrackersList': return accessor(index, new TrackersList())! as TrackersList;
     case 'SettingsResponse': return accessor(index, new SettingsResponse())! as SettingsResponse;
+    case 'SkeletonConfigResponse': return accessor(index, new SkeletonConfigResponse())! as SkeletonConfigResponse;
     case 'slimevr_protocol_misc_Acknowledgement': return accessor(index, new Acknowledgement())! as Acknowledgement;
     default: return null;
   }

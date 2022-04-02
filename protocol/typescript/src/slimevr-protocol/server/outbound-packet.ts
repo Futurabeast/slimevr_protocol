@@ -5,6 +5,7 @@ import * as flatbuffers from 'flatbuffers';
 import { Acknowledgement, AcknowledgementT } from '../../slimevr-protocol/misc/acknowledgement';
 import { OutboundUnion, unionToOutboundUnion, unionListToOutboundUnion } from '../../slimevr-protocol/server/outbound-union';
 import { SettingsResponse, SettingsResponseT } from '../../slimevr-protocol/server/settings-response';
+import { SkeletonConfigResponse, SkeletonConfigResponseT } from '../../slimevr-protocol/server/skeleton-config-response';
 import { TrackersList, TrackersListT } from '../../slimevr-protocol/server/trackers-list';
 
 
@@ -111,7 +112,7 @@ constructor(
   public packetCounter: number = 0,
   public acknowledgeMe: boolean = false,
   public packetType: OutboundUnion = OutboundUnion.NONE,
-  public packet: AcknowledgementT|SettingsResponseT|TrackersListT|null = null
+  public packet: AcknowledgementT|SettingsResponseT|SkeletonConfigResponseT|TrackersListT|null = null
 ){}
 
 

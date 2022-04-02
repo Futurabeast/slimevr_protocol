@@ -16,23 +16,23 @@ public final class AssignTrackerRequest extends Table {
   public AssignTrackerRequest __assign(int _i, ByteBuffer _bb) { __init(_i, _bb); return this; }
 
   public int id() { int o = __offset(4); return o != 0 ? bb.get(o + bb_pos) & 0xFF : 0; }
-  public int role() { int o = __offset(6); return o != 0 ? bb.get(o + bb_pos) & 0xFF : 0; }
+  public int mountingPosition() { int o = __offset(6); return o != 0 ? bb.get(o + bb_pos) & 0xFF : 0; }
   public int mountingRotation() { int o = __offset(8); return o != 0 ? bb.getShort(o + bb_pos) & 0xFFFF : 0; }
 
   public static int createAssignTrackerRequest(FlatBufferBuilder builder,
       int id,
-      int role,
+      int mountingPosition,
       int mountingRotation) {
     builder.startTable(3);
     AssignTrackerRequest.addMountingRotation(builder, mountingRotation);
-    AssignTrackerRequest.addRole(builder, role);
+    AssignTrackerRequest.addMountingPosition(builder, mountingPosition);
     AssignTrackerRequest.addId(builder, id);
     return AssignTrackerRequest.endAssignTrackerRequest(builder);
   }
 
   public static void startAssignTrackerRequest(FlatBufferBuilder builder) { builder.startTable(3); }
   public static void addId(FlatBufferBuilder builder, int id) { builder.addByte(0, (byte) id, (byte) 0); }
-  public static void addRole(FlatBufferBuilder builder, int role) { builder.addByte(1, (byte) role, (byte) 0); }
+  public static void addMountingPosition(FlatBufferBuilder builder, int mountingPosition) { builder.addByte(1, (byte) mountingPosition, (byte) 0); }
   public static void addMountingRotation(FlatBufferBuilder builder, int mountingRotation) { builder.addShort(2, (short) mountingRotation, (short) 0); }
   public static int endAssignTrackerRequest(FlatBufferBuilder builder) {
     int o = builder.endTable();

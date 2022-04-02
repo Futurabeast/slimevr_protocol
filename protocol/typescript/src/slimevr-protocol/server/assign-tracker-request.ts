@@ -2,7 +2,7 @@
 
 import * as flatbuffers from 'flatbuffers';
 
-import { TrackerRole } from '../../slimevr-protocol/server/tracker-role';
+import { TrackerPosition } from '../../slimevr-protocol/server/tracker-position';
 
 
 export class AssignTrackerRequest {
@@ -28,9 +28,9 @@ id():number {
   return offset ? this.bb!.readUint8(this.bb_pos + offset) : 0;
 }
 
-role():TrackerRole {
+mountingPosition():TrackerPosition {
   const offset = this.bb!.__offset(this.bb_pos, 6);
-  return offset ? this.bb!.readUint8(this.bb_pos + offset) : TrackerRole.NONE;
+  return offset ? this.bb!.readUint8(this.bb_pos + offset) : TrackerPosition.NONE;
 }
 
 mountingRotation():number {
@@ -46,8 +46,8 @@ static addId(builder:flatbuffers.Builder, id:number) {
   builder.addFieldInt8(0, id, 0);
 }
 
-static addRole(builder:flatbuffers.Builder, role:TrackerRole) {
-  builder.addFieldInt8(1, role, TrackerRole.NONE);
+static addMountingPosition(builder:flatbuffers.Builder, mountingPosition:TrackerPosition) {
+  builder.addFieldInt8(1, mountingPosition, TrackerPosition.NONE);
 }
 
 static addMountingRotation(builder:flatbuffers.Builder, mountingRotation:number) {
@@ -59,10 +59,10 @@ static endAssignTrackerRequest(builder:flatbuffers.Builder):flatbuffers.Offset {
   return offset;
 }
 
-static createAssignTrackerRequest(builder:flatbuffers.Builder, id:number, role:TrackerRole, mountingRotation:number):flatbuffers.Offset {
+static createAssignTrackerRequest(builder:flatbuffers.Builder, id:number, mountingPosition:TrackerPosition, mountingRotation:number):flatbuffers.Offset {
   AssignTrackerRequest.startAssignTrackerRequest(builder);
   AssignTrackerRequest.addId(builder, id);
-  AssignTrackerRequest.addRole(builder, role);
+  AssignTrackerRequest.addMountingPosition(builder, mountingPosition);
   AssignTrackerRequest.addMountingRotation(builder, mountingRotation);
   return AssignTrackerRequest.endAssignTrackerRequest(builder);
 }
@@ -70,7 +70,7 @@ static createAssignTrackerRequest(builder:flatbuffers.Builder, id:number, role:T
 unpack(): AssignTrackerRequestT {
   return new AssignTrackerRequestT(
     this.id(),
-    this.role(),
+    this.mountingPosition(),
     this.mountingRotation()
   );
 }
@@ -78,7 +78,7 @@ unpack(): AssignTrackerRequestT {
 
 unpackTo(_o: AssignTrackerRequestT): void {
   _o.id = this.id();
-  _o.role = this.role();
+  _o.mountingPosition = this.mountingPosition();
   _o.mountingRotation = this.mountingRotation();
 }
 }
@@ -86,7 +86,7 @@ unpackTo(_o: AssignTrackerRequestT): void {
 export class AssignTrackerRequestT {
 constructor(
   public id: number = 0,
-  public role: TrackerRole = TrackerRole.NONE,
+  public mountingPosition: TrackerPosition = TrackerPosition.NONE,
   public mountingRotation: number = 0
 ){}
 
@@ -94,7 +94,7 @@ constructor(
 pack(builder:flatbuffers.Builder): flatbuffers.Offset {
   return AssignTrackerRequest.createAssignTrackerRequest(builder,
     this.id,
-    this.role,
+    this.mountingPosition,
     this.mountingRotation
   );
 }

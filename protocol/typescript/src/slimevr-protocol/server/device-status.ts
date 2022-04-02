@@ -4,7 +4,7 @@ import * as flatbuffers from 'flatbuffers';
 
 import { Quat, QuatT } from '../../slimevr-protocol/datatypes/quat';
 import { Vec3f, Vec3fT } from '../../slimevr-protocol/datatypes/vec3f';
-import { TrackerRole } from '../../slimevr-protocol/server/tracker-role';
+import { TrackerPosition } from '../../slimevr-protocol/server/tracker-position';
 import { TrackerStatus } from '../../slimevr-protocol/server/tracker-status';
 
 
@@ -38,9 +38,9 @@ name(optionalEncoding?:any):string|Uint8Array|null {
   return offset ? this.bb!.__string(this.bb_pos + offset, optionalEncoding) : null;
 }
 
-role():TrackerRole {
+mountingPosition():TrackerPosition {
   const offset = this.bb!.__offset(this.bb_pos, 8);
-  return offset ? this.bb!.readUint8(this.bb_pos + offset) : TrackerRole.NONE;
+  return offset ? this.bb!.readUint8(this.bb_pos + offset) : TrackerPosition.NONE;
 }
 
 mountingRotation():number {
@@ -105,8 +105,8 @@ static addName(builder:flatbuffers.Builder, nameOffset:flatbuffers.Offset) {
   builder.addFieldOffset(1, nameOffset, 0);
 }
 
-static addRole(builder:flatbuffers.Builder, role:TrackerRole) {
-  builder.addFieldInt8(2, role, TrackerRole.NONE);
+static addMountingPosition(builder:flatbuffers.Builder, mountingPosition:TrackerPosition) {
+  builder.addFieldInt8(2, mountingPosition, TrackerPosition.NONE);
 }
 
 static addMountingRotation(builder:flatbuffers.Builder, mountingRotation:number) {
@@ -159,7 +159,7 @@ unpack(): DeviceStatusT {
   return new DeviceStatusT(
     this.id(),
     this.name(),
-    this.role(),
+    this.mountingPosition(),
     this.mountingRotation(),
     (this.rotation() !== null ? this.rotation()!.unpack() : null),
     (this.position() !== null ? this.position()!.unpack() : null),
@@ -177,7 +177,7 @@ unpack(): DeviceStatusT {
 unpackTo(_o: DeviceStatusT): void {
   _o.id = this.id();
   _o.name = this.name();
-  _o.role = this.role();
+  _o.mountingPosition = this.mountingPosition();
   _o.mountingRotation = this.mountingRotation();
   _o.rotation = (this.rotation() !== null ? this.rotation()!.unpack() : null);
   _o.position = (this.position() !== null ? this.position()!.unpack() : null);
@@ -195,7 +195,7 @@ export class DeviceStatusT {
 constructor(
   public id: number = 0,
   public name: string|Uint8Array|null = null,
-  public role: TrackerRole = TrackerRole.NONE,
+  public mountingPosition: TrackerPosition = TrackerPosition.NONE,
   public mountingRotation: number = 0,
   public rotation: QuatT|null = null,
   public position: Vec3fT|null = null,
@@ -215,7 +215,7 @@ pack(builder:flatbuffers.Builder): flatbuffers.Offset {
   DeviceStatus.startDeviceStatus(builder);
   DeviceStatus.addId(builder, this.id);
   DeviceStatus.addName(builder, name);
-  DeviceStatus.addRole(builder, this.role);
+  DeviceStatus.addMountingPosition(builder, this.mountingPosition);
   DeviceStatus.addMountingRotation(builder, this.mountingRotation);
   DeviceStatus.addRotation(builder, (this.rotation !== null ? this.rotation!.pack(builder) : 0));
   DeviceStatus.addPosition(builder, (this.position !== null ? this.position!.pack(builder) : 0));

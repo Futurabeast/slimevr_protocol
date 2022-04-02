@@ -5,10 +5,12 @@ import * as flatbuffers from 'flatbuffers';
 import { Acknowledgement, AcknowledgementT } from '../../slimevr-protocol/misc/acknowledgement';
 import { AssignTrackerRequest, AssignTrackerRequestT } from '../../slimevr-protocol/server/assign-tracker-request';
 import { ChangeSettingsRequest, ChangeSettingsRequestT } from '../../slimevr-protocol/server/change-settings-request';
+import { ChangeSkeletonConfigRequest, ChangeSkeletonConfigRequestT } from '../../slimevr-protocol/server/change-skeleton-config-request';
 import { ConnectionRequest, ConnectionRequestT } from '../../slimevr-protocol/server/connection-request';
 import { InboundUnion, unionToInboundUnion, unionListToInboundUnion } from '../../slimevr-protocol/server/inbound-union';
 import { ResetRequest, ResetRequestT } from '../../slimevr-protocol/server/reset-request';
 import { SettingsRequest, SettingsRequestT } from '../../slimevr-protocol/server/settings-request';
+import { SkeletonConfigRequest, SkeletonConfigRequestT } from '../../slimevr-protocol/server/skeleton-config-request';
 
 
 export class InboundPacket {
@@ -114,7 +116,7 @@ constructor(
   public packetCounter: number = 0,
   public acknowledgeMe: boolean = false,
   public packetType: InboundUnion = InboundUnion.NONE,
-  public packet: AcknowledgementT|AssignTrackerRequestT|ChangeSettingsRequestT|ConnectionRequestT|ResetRequestT|SettingsRequestT|null = null
+  public packet: AcknowledgementT|AssignTrackerRequestT|ChangeSettingsRequestT|ChangeSkeletonConfigRequestT|ConnectionRequestT|ResetRequestT|SettingsRequestT|SkeletonConfigRequestT|null = null
 ){}
 
 
